@@ -10,7 +10,7 @@ import { AuthService } from './auth/auth.service'
 
 export class AppComponent {
   constructor(public router: Router, public auth: AuthService) {
-    if(!auth.authenticated)auth.login();
+    if(!auth.authenticated())auth.login();
   }
   title = 'Welcome on Speeroo';
 }
