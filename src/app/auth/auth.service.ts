@@ -3,6 +3,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { AuthConfig }      from './auth.config';
 import { Router } from '@angular/router';
 import Auth0Lock from 'auth0-lock';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
   });
   response: any;
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public userService : UserService) {
     if(this.authenticated()){
       this.router.navigate(['home']);
     }
@@ -35,6 +36,14 @@ export class AuthService {
       localStorage.setItem('token', authResult.idToken);
       localStorage.setItem('profile', JSON.stringify(profile));
       localStorage.setItem('accessToken', authResult.accessToken);
+      if(profile.signed_up){
+        console.log("Enjoy your journey on Speeroo, " + profile.nickname);
+        this.userService.createUser({"name": profile.nickname, "userId": profile.user_id, "peerId": ""}).subscribe(data => {
+          this.response = data.message;
+        });
+      } else {
+        console.log("Welcome back, " + profile.nickname);
+      }
       this.router.navigate(['home']);
     });
   }

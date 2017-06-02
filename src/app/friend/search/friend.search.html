@@ -1,0 +1,10 @@
+<form name="searchForm" (ngSubmit)="searchFriend()">
+  Search for a friend
+  <input type="text" [(ngModel)]="searchName" name="searchInput"/>
+  <button type="submit">Search</button>
+</form>
+
+<div *ngFor="let s of searchResults">
+  {{s.name}}
+  <button (click)="addFriend(s)">Add</button>
+</div>

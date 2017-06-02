@@ -3,4 +3,4 @@ declare var module: NodeModule;
 interface NodeModule {
   id: string;
 }
-declare var SimplePeer: any;
+declare var Peer: any;
