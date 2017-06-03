@@ -6,5 +6,7 @@
 
 <div *ngFor="let s of searchResults">
   {{s.name}}
-  <button (click)="addFriend(s)">Add</button>
+  <button (click)="friendlist.addFriend(s)">Add</button>
 </div>
+
+<friend-list #friendlist></friend-list>

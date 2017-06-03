@@ -1,3 +1,5 @@
-<div *ngFor = "let f of friends">
-  <friend-detail [friend]="f"></friend-detail>
+<div *ngIf="friendlist">
+  <div *ngFor = "let f of friendlist.list">
+    <friend-detail [friend]="f" [peer]="peer"></friend-detail>
+  </div>
 </div>

@@ -17,9 +17,9 @@ export class FriendlistService {
     return response;
   }
 
-  public updateFriendlist(friendlist: Friendlist): Observable<Friendlist>{
+  public updateFriendlist(friendlist: Friendlist): Observable<any>{
     let response = this.http.put(baseUrl + "/" + encodeURI(friendlist._id), friendlist,
-      {headers:contentHeaders}).map(this.mapFriendlist.bind(this));
+      {headers:contentHeaders}).map(this.logResponse.bind(this));
     return response;
   }
 

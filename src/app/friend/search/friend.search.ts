@@ -20,7 +20,4 @@ export class FriendSearch {
     this.userService.getUsersByName(this.searchName).subscribe(data => this.searchResults = data);
   }
 
-  public addFriend(friend: User){
-
-  }
 }

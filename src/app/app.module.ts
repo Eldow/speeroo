@@ -15,6 +15,7 @@ import { FriendDetail} from './friend/detail/friend.detail';
 import { FriendList } from './friend/list/friend.list';
 import { FriendSearch } from './friend/search/friend.search';
 import { FriendlistService } from './friend/friendlist.service';
+import { LoginComponent } from './login/login.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
@@ -22,7 +23,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, FriendDetail, FriendList, FriendSearch
+    AppComponent, HomeComponent, FriendDetail, FriendList, FriendSearch,
+    LoginComponent
   ],
   imports: [
     HttpModule, BrowserModule, FormsModule,
