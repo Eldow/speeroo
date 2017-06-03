@@ -47,6 +47,11 @@ app.use(function (req, res, next) {
 // Set our api routes
 app.use('/api/users', users);
 app.use('/api/friendlists', friendlists);
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 /**
  * Get port from environment and store in Express.
  */
