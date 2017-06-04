@@ -22,6 +22,8 @@ export class FriendDetail implements OnInit{
   constructor(public userService: UserService) {}
 
   ngOnInit(){
+    this.myVideo = this.myVideo.nativeElement;
+    this.theirVideo = this.theirVideo.nativeElement;
     this.isCalling = false;
     this.callAccepted = false;
     this.n.getUserMedia =  ( this.n.getUserMedia || this.n.webkitGetUserMedia
