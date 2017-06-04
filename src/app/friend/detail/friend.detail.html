@@ -8,5 +8,5 @@
 </div>
 
 <!-- Video area -->
-<video *ngIf="callAccepted" #myVideo></video>
-<video *ngIf="callAccepted" #theirVideo></video>
+<video [hidden]="!callAccepted" #myVideo></video>
+<video [hidden]="!callAccepted" #theirVideo></video>
