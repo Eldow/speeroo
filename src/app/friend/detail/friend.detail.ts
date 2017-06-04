@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../user/user.class';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'friend-detail',
@@ -15,9 +16,16 @@ export class FriendDetail implements OnInit{
   peer: any;
   mediaStream: any;
 
+  constructor(public userService: UserService) {
+
+  }
+
   ngOnInit(){
+    this.userService.getUserByUserId(this.friend.userId).subscribe(data => {
+      this.friend.peerId = data.peerId;
+    })
+
     let conn = this.peer.connect(this.friend.peerId);
-    console.log("init");
     /*this.peer.on('connection', function(dataConn) {
       console.log(dataConn);
     });
@@ -31,6 +39,21 @@ export class FriendDetail implements OnInit{
       // Send messages
       conn.send('Hello!');
     });*/
+    console.log(this.peer);
+    console.log(conn);
+
+    conn.on('open', function(){
+      console.log("connect to peer");
+      conn.send("Hello");
+      console.log('data sent');
+    });
+
+    this.peer.on('connection', function(conn) {
+      conn.on('data', function(data){
+        console.log("received complete: ", Date());
+      });
+    });
+
   }
 
   public call(friend:User){

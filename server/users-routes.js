@@ -40,7 +40,7 @@ router.route('/search/:name')
 
 router.route('/:id')
 .get(function(req,res){
-  User.find({userId:req.params.id}, function (err, user){
+  User.findOne({userId:req.params.id}, function (err, user){
     if(err)
       res.send(err);
     res.json(user);

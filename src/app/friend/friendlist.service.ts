@@ -27,7 +27,7 @@ export class FriendlistService {
     let response = this.http.get(baseUrl + "/owner/" + encodeURI(ownerId),
       {headers:contentHeaders});
     if(response)
-      response.map(this.mapFriendlist.bind(this))
+      response.map(this.mapFriendlist.bind(this));
     return response;
   }
 
@@ -53,5 +53,4 @@ export class FriendlistService {
     })
     return friendlist;
   }
-
 }

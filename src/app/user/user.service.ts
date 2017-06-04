@@ -33,11 +33,18 @@ export class UserService {
     return users;
   }
 
+  public getUserByUserId(id: string):Observable<any>{
+    let user = this.http.get(baseUrl + '/' + encodeURI(id),
+      {headers:contentHeaders}).map(this.logResponse.bind(this));
+    return user;
+  }
+
   private mapUsers(response: Response): User[] {
     return response.json().map(this.toUser.bind(this));
   }
 
   private toUser(r: any): User {
+    console.log(r);
     let user = <User>({
       name: r.name,
       userId: r.userId,
