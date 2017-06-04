@@ -62,7 +62,7 @@ export class FriendDetail implements OnInit{
     this.callAccepted = true;
     this.isCalling = true;
     this.currentCall = this.peer.call(friend.peerId, this.mediaStream);
-    this.currentCall.on('stream', function(stream){
+    this.currentCall.on('stream', stream => {
       this.theirVideo.src = URL.createObjectURL(stream);
     });
   }
@@ -72,7 +72,7 @@ export class FriendDetail implements OnInit{
     this.callAccepted = true;
     this.isCalling = true;
     this.currentCall.answer(this.mediaStream);
-    this.currentCall.on('stream', function(stream){
+    this.currentCall.on('stream', stream => {
       this.theirVideo.src = URL.createObjectURL(stream);
     });
   }
