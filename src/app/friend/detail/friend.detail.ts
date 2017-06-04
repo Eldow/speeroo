@@ -31,7 +31,7 @@ export class FriendDetail implements OnInit{
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.myVideo.src = URL.createObjectURL(stream);
       this.mediaStream = stream;
-    });
+    }, err => { console.log(err); });
 
     // Fill the peerId of each friend
     this.userService.getUserByUserId(this.friend.userId).subscribe(data => {
