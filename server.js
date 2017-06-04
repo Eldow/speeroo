@@ -49,10 +49,6 @@ app.use(function (req, res, next) {
 app.use('/api/users', users);
 app.use('/api/friendlists', friendlists);
 
-// Catch all other routes and return the index file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
 /**
  * Get port from environment and store in Express.
  */
@@ -65,6 +61,11 @@ app.set('port', port);
 const server = http.createServer(app);
 const options = { debug: true };
 app.use('/peerjs', expressPeerServer(server, options));
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 /**
  * Listen on provided port, on all network interfaces.
