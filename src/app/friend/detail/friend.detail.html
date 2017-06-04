@@ -1,8 +1,12 @@
 <div *ngIf="friend">
   {{friend.name}}
   <button type="submit" (click)="call(friend)">Call</button>
-  <div *ngIf="isCalling()">
+  <div *ngIf="isCalling">
     <button type="submit" (click)="answer(friend)">Answer</button>
     <button type="submit" (click)="decline(friend)">Decline</button>
   </div>
 </div>
+
+<!-- Video area -->
+<video *ngIf="callAccepted" #my-video></video>
+<video *ngIf="callAccepted" #their-video></video>
