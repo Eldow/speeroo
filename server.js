@@ -5,6 +5,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const expressPeerServer = require('peer').ExpressPeerServer;
 
 const mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017/speeroo';
 // Mongoose configuration
@@ -62,6 +63,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 const server = http.createServer(app);
+const options = { debug: true };
+app.use('/peerjs', expressPeerServer(server, options));
 
 /**
  * Listen on provided port, on all network interfaces.
