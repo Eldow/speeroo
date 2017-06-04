@@ -63,7 +63,7 @@ export class FriendDetail implements OnInit{
   // Answer a call
   public answer(friend:User){
     if(this.currentCall) {
-      this.currentCall.close(); // Close the current call if any
+      this.currentCall.close();
     }
     this.currentCall.answer(this.mediaStream);
     this.callAccepted = true;
