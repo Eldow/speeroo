@@ -14,7 +14,7 @@ import { UserService } from '../../user/user.service';
 
 export class FriendList {
   friendlist: Friendlist
-  peer = new Peer(JSON.parse(localStorage.getItem('profile')).userId, {host: 'speeroo.herokuapp.com', port:443, path: ''});
+  peer = new Peer(JSON.parse(localStorage.getItem('profile')).userId, {host: 'speeroo.herokuapp.com', secure:true, port:443, key: 'peerjs'});
   //peer = new Peer({key: 'l23p62b0pco9a4i'});
   response : any;
 
