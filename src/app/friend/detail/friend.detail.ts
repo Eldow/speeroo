@@ -40,8 +40,18 @@ export class FriendDetail implements OnInit{
       this.friend.peerId = data.peerId;
     });
 
+    // Test if connection opened
+    this.peer.on('open', function(){
+      console.log(this.peer.id);
+    });
+
+    // Log errors
+    this.peer.on('error', err => {
+      console.log(err);
+    });
+
     // Always listen for incoming calls
-    this.peer.on('call', function(call) {
+    this.peer.on('call', call => {
       this.isCalling = true;
       this.currentCall = call;
     });
