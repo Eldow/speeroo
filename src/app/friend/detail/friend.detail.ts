@@ -70,7 +70,6 @@ export class FriendDetail implements OnInit{
   // Answer a call
   public answer(friend:User){
     this.callAccepted = true;
-    this.isCalling = true;
     this.currentCall.answer(this.mediaStream);
     this.currentCall.on('stream', stream => {
       this.theirVideo.src = URL.createObjectURL(stream);
