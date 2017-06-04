@@ -9,8 +9,8 @@ import { UserService } from '../../user/user.service';
 })
 
 export class FriendDetail implements OnInit{
-  @ViewChild('my-video') myVideo: any;
-  @ViewChild('their-video') theirVideo: any;
+  @ViewChild('myVideo') myVideo: any;
+  @ViewChild('theirVideo') theirVideo: any;
   @Input() friend: User;
   @Input() peer: any;
   mediaStream: any;
