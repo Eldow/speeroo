@@ -5,7 +5,7 @@ import { contentHeaders } from '../auth/auth.headers';
 import { Observable } from 'rxjs/Rx';
 import { Friendlist } from './friendlist.class';
 
-const baseUrl = 'https://youmuu.herokuapp.com/api/friendlists';
+const baseUrl = 'https://speeroo.herokuapp.com/api/friendlists';
 
 @Injectable()
 export class FriendlistService {
