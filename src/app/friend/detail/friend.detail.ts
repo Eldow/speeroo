@@ -49,9 +49,6 @@ export class FriendDetail implements OnInit{
 
   // Call a friend
   public call(friend:User){
-    if (this.currentCall) {
-      this.currentCall.close();
-    }
     this.callAccepted = true;
     this.isCalling = true;
     this.currentCall = this.peer.call(friend.peerId, this.mediaStream);
@@ -62,12 +59,9 @@ export class FriendDetail implements OnInit{
 
   // Answer a call
   public answer(friend:User){
-    if(this.currentCall) {
-      this.currentCall.close();
-    }
-    this.currentCall.answer(this.mediaStream);
     this.callAccepted = true;
     this.isCalling = true;
+    this.currentCall.answer(this.mediaStream);
     this.currentCall.on('stream', function(stream){
       this.theirVideo.src = URL.createObjectURL(stream);
     });
