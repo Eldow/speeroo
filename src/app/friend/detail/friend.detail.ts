@@ -40,11 +40,6 @@ export class FriendDetail implements OnInit{
       this.friend.peerId = data.peerId;
     });
 
-    // Test if connection opened
-    this.peer.on('open', function(){
-      console.log(this.peer.id);
-    });
-
     // Log errors
     this.peer.on('error', err => {
       console.log(err);
@@ -60,7 +55,6 @@ export class FriendDetail implements OnInit{
   // Call a friend
   public call(friend:User){
     this.callAccepted = true;
-    this.isCalling = true;
     this.currentCall = this.peer.call(friend.peerId, this.mediaStream);
     this.currentCall.on('stream', stream => {
       this.theirVideo.src = URL.createObjectURL(stream);
