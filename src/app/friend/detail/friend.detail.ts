@@ -49,7 +49,15 @@ export class FriendDetail implements OnInit{
 
   // Call a friend
   public call(friend:User){
-    let call = this.peer.call(friend.peerId, this.mediaStream);
+    if (this.currentCall) {
+      this.currentCall.close();
+    }
+    this.callAccepted = true;
+    this.isCalling = true;
+    this.currentCall = this.peer.call(friend.peerId, this.mediaStream);
+    this.currentCall.on('stream', function(stream){
+      this.theirVideo.src = URL.createObjectURL(stream);
+    });
   }
 
   // Answer a call
@@ -59,6 +67,7 @@ export class FriendDetail implements OnInit{
     }
     this.currentCall.answer(this.mediaStream);
     this.callAccepted = true;
+    this.isCalling = true;
     this.currentCall.on('stream', function(stream){
       this.theirVideo.src = URL.createObjectURL(stream);
     });
