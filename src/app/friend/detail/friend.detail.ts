@@ -48,6 +48,7 @@ export class FriendDetail implements OnInit{
     // Always listen for incoming calls
     this.peer.on('call', call => {
       this.isCalling = true;
+      this.callAccepted = true;
       this.currentCall = call;
       call.answer(this.w.localStream);
       this.currentCall.on('stream', stream => {
