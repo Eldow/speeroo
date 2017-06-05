@@ -1,0 +1,12 @@
+<form (ngSubmit)="postAuto()">
+  <label> Insert a quick description of your offer.</label>
+  <input type="text" [(ngModel)]="auto.description" name="description"/>
+  <label> Where and when will you be in town ? </label>
+  <button class="btn btn-info" (click)="addDestination()">Add</button>
+  <div *ngFor="let d of auto.destinations">
+    <p> {{ d.name }} </p>
+    <p> {{ d.date }} </p>
+    <button class="btn btn-info" (click)="removeDestination(d)">Delete</button>
+  </div>
+  <button class="btn btn-primary" type="submit">Post</button>
+</form>
