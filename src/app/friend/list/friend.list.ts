@@ -84,10 +84,18 @@ export class FriendList {
   }
 
   public onFriendCalled(friend: User){
-    let conn = this.peer.connect(friend.peerId);
+    let conn = this.peer.connect(friend.peerId, {reliable:true});
+
     conn.on('open', () => {
-      conn.send('Message from' + this.id);
+      conn.send('Hi!');
     });
+    conn.on('error', function(err) {
+        console.log('Error', err)
+    });
+    conn.on('data', function(data) {
+        console.log('Received', data);
+    });
+
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.myVideo.src = URL.createObjectURL(stream);
       let call = this.peer.call(friend.peerId, stream);
