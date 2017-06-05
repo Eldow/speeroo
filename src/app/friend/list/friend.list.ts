@@ -20,7 +20,9 @@ export class FriendList {
   w = <any>window;
 
   friendlist: Friendlist
-  peer = new Peer({host: 'speeroo.herokuapp.com', secure:true, port:443, path: '/peerjs' });
+  peer = new Peer({host: 'speeroo.herokuapp.com', secure:true, port:443, path: '/peerjs', config: { 'iceServers': [
+            { 'url': 'stun:stun.l.google.com:19302' }
+          ] }, debug:true });
   id: any;
   //peer = new Peer({key: 'l23p62b0pco9a4i'});
   response : any;
