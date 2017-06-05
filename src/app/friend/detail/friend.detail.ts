@@ -57,9 +57,8 @@ export class FriendDetail implements OnInit{
     this.callAccepted = true;
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.currentCall = this.peer.call(friend.peerId, stream);
+      this.displayTheirStream(this.currentCall);
     }, err => { console.log(err); });
-
-    this.displayTheirStream(this.currentCall);
   }
 
   // Answer a call
@@ -67,9 +66,8 @@ export class FriendDetail implements OnInit{
     this.callAccepted = true;
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.currentCall.answer(stream);
+      this.displayTheirStream(this.currentCall);
     }, err => { console.log(err); });
-
-    this.displayTheirStream(this.currentCall);
   }
 
   private displayTheirStream(call: any){
