@@ -56,16 +56,19 @@ export class FriendDetail implements OnInit{
   public call(friend:User){
     this.callAccepted = true;
     this.currentCall = this.peer.call(friend.peerId, this.mediaStream);
-    this.currentCall.on('stream', stream => {
-      this.theirVideo.src = URL.createObjectURL(stream);
-    });
+    this.displayTheirStream(this.currentCall);
   }
 
   // Answer a call
   public answer(friend:User){
     this.callAccepted = true;
     this.currentCall.answer(this.mediaStream);
-    this.currentCall.on('stream', stream => {
+    this.displayTheirStream(this.currentCall);
+  }
+
+  private displayTheirStream(call: any){
+    console.log(call);
+    call.on('stream', stream => {
       this.theirVideo.src = URL.createObjectURL(stream);
     });
   }
