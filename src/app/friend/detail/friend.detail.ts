@@ -49,7 +49,9 @@ export class FriendDetail implements OnInit{
     this.peer.on('call', call => {
       this.isCalling = true;
       this.currentCall = call;
+      this.displayTheirStream(call);
     });
+
   }
 
   // Call a friend
