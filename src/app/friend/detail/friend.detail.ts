@@ -49,12 +49,12 @@ export class FriendDetail implements OnInit{
     this.peer.on('call', call => {
       this.isCalling = true;
       this.currentCall = call;
-      this.n.getUserMedia({audio: true, video: true}, stream => {
-        this.myVideo.src = URL.createObjectURL(stream);
-        this.w.localStream = stream;
-        call.answer(stream);
-        this.displayTheirStream(call);
-      }, err => { console.log(err); });
+      call.answer(this.w.localStream);
+      this.currentCall.on('stream', stream => {
+        this.theirVideo.src = URL.createObjectURL(stream);
+      }, err => {
+        console.log('Failed to get stream', err);
+      });
     });
 
   }
@@ -63,24 +63,20 @@ export class FriendDetail implements OnInit{
   public call(friend:User){
     this.callAccepted = true;
     this.currentCall = this.peer.call(friend.peerId, this.w.localStream);
-    this.displayTheirStream(this.currentCall);
+    this.displayTheirStream();
   }
 
   // Answer a call
   public answer(){
     this.callAccepted = true;
     this.currentCall.answer(this.w.localStream);
-    this.displayTheirStream(this.currentCall);
+    this.displayTheirStream();
   }
 
   // Display your friend's stream
-  private displayTheirStream(call: any){
-    console.log(call);
-    call.on('stream', stream => {
-      this.theirVideo.src = URL.createObjectURL(stream);
-    }, err => {
-      console.log('Failed to get stream', err);
-    });
+  private displayTheirStream(){
+    console.log(this.currentCall);
+
   }
 
   // Decline a call
