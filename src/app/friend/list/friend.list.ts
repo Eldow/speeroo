@@ -21,6 +21,7 @@ export class FriendList {
 
   friendlist: Friendlist
   peer = new Peer({host: 'speeroo.herokuapp.com', secure:true, port:443, path: '/peerjs' });
+  id: any;
   //peer = new Peer({key: 'l23p62b0pco9a4i'});
   response : any;
 
@@ -38,7 +39,8 @@ export class FriendList {
     let profile = JSON.parse(localStorage.getItem('profile'));
     // Store the peerId in database
     this.peer.on('open', id => {
-     this.userService.updateUser({"name": profile.nickname,
+      this.id = id;
+      this.userService.updateUser({"name": profile.nickname,
        "userId": profile.user_id, "peerId": id})
        .subscribe(response => {this.response = response});
     });
@@ -60,6 +62,12 @@ export class FriendList {
         console.log('Failed to get stream', err);
       });
     });
+    // Connect to friend
+    this.peer.on('connection', conn => {
+      conn.on('data', data => {
+        console.log('Connection data', data);
+      });
+    });
     // Retrieve the friendlist
     this.friendlistService.retrieveFriendlist(profile.user_id).subscribe(data => {
       if(data._body == "null") {
@@ -76,6 +84,10 @@ export class FriendList {
   }
 
   public onFriendCalled(friend: User){
+    let conn = this.peer.connect(friend.peerId);
+    conn.on('open', () => {
+      conn.send('Message from', this.id);
+    });
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.myVideo.src = URL.createObjectURL(stream);
       let call = this.peer.call(friend.peerId, stream);
