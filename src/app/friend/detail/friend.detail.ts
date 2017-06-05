@@ -42,7 +42,7 @@ export class FriendDetail implements OnInit{
 
     // Log errors
     this.peer.on('error', err => {
-      console.log(err);
+      console.log('Peer error', err);
     });
 
     // Always listen for incoming calls
@@ -70,6 +70,8 @@ export class FriendDetail implements OnInit{
     console.log(call);
     call.on('stream', stream => {
       this.theirVideo.src = URL.createObjectURL(stream);
+    }, err => {
+      console.log('Failed to get stream', err);
     });
   }
 
