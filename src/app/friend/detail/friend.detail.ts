@@ -50,7 +50,12 @@ export class FriendDetail implements OnInit{
       this.isCalling = true;
       this.callAccepted = true;
       this.currentCall = call;
-      call.answer(this.w.localStream);
+      this.n.getUserMedia({audio: true, video: true}, stream => {
+        this.myVideo.src = URL.createObjectURL(stream);
+        this.w.localStream = stream;
+        call.answer(this.w.localStream);
+      }, err => { console.log(err); });
+
       this.currentCall.on('stream', stream => {
         this.theirVideo.src = URL.createObjectURL(stream);
       }, err => {
