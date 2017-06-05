@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { User } from '../../user/user.class';
 import { UserService } from '../../user/user.service';
 
@@ -8,68 +8,38 @@ import { UserService } from '../../user/user.service';
   styleUrls: ['./friend.detail.css']
 })
 
-
 export class FriendDetail implements OnInit{
-  @Input()
-  friend: User;
-  @Input()
-  peer: any;
-  mediaStream: any;
 
-  constructor(public userService: UserService) {
+  @Input() friend: User;
+  @Output() friendCalled: EventEmitter<any> = new EventEmitter();
 
-  }
+  constructor(public userService: UserService) {}
 
   ngOnInit(){
+    // Fill the peerId of each friend
     this.userService.getUserByUserId(this.friend.userId).subscribe(data => {
       this.friend.peerId = data.peerId;
-    })
-
-    let conn = this.peer.connect(this.friend.peerId);
-    /*this.peer.on('connection', function(dataConn) {
-      console.log(dataConn);
-    });
-
-    conn.on('open', function() {
-      // Receive messages
-      conn.on('data', function(data) {
-        console.log('Received', data);
-      });
-
-      // Send messages
-      conn.send('Hello!');
-    });*/
-    conn.on('open', function(){
-      console.log("connect to peer");
-      conn.send("Hello");
-      console.log('data sent');
-    });
-
-    this.peer.on('connection', function(conn) {
-      conn.on('data', function(data){
-        console.log("received complete: ", Date());
-      });
     });
 
   }
 
+  // Call a friend
   public call(friend:User){
-    let call = this.peer.call(friend.peerId, this.mediaStream);
+    this.friendCalled.emit();
   }
 
-  public answer(friend:User){
-    this.peer.on('call', function(call) {
-      call.answer(this.mediaStream);
-    });
+  // Answer a call
+  public answer(){
+
   }
 
-  public decline(friend:User){
-    this.peer.on('call', function(call) {
-      call.close();
-    });
+  // Display your friend's stream
+  private displayTheirStream(){
+
   }
 
-  public isCalling(){
-    return true;
+  // Decline a call
+  public decline(){
+
   }
 }

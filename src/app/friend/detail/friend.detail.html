@@ -1,17 +1,8 @@
-
-<div *ngIf="friend" class="table-cell-custom">
-  <span class="name-block col-xs-8">{{friend.name}}</span>
-  <div *ngIf="!isCalling()" class="btn-group col-xs-4" role="group">
-    <button type="submit" class="btn btn-info" (click)="call(friend)">
-      <i class="fa fa-lg fa-phone"></i>
-    </button>
-  </div>
-  <div *ngIf="isCalling()" class="btn-group col-xs-4" role="group">
-    <button type="submit" class="btn btn-primary" (click)="answer(friend)">
-      <i class="fa fa-lg fa-phone"></i>
-    </button>
-    <button type="submit" class="btn btn-secondary" (click)="decline(friend)">
-      <i class="fa fa-lg fa-times"></i>
-    </button>
+<div *ngIf="friend">
+  {{friend.name}}
+  <button type="submit" (click)="call(friend)">Call</button>
+  <div *ngIf="isCalling">
+    <button type="submit" (click)="answer()">Answer</button>
+    <button type="submit" (click)="decline()">Decline</button>
   </div>
 </div>

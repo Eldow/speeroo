@@ -66,6 +66,9 @@ app.use('/peerjs', expressPeerServer(server, options));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 /**
  * Listen on provided port, on all network interfaces.
