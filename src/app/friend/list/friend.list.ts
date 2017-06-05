@@ -37,7 +37,7 @@ export class FriendList {
        || this.n.mozGetUserMedia || this.n.msGetUserMedia );
     let profile = JSON.parse(localStorage.getItem('profile'));
     // Store the peerId in database
-    this.peer.on('open', function(id) {
+    this.peer.on('open', id => {
      this.userService.updateUser({"name": profile.nickname,
        "userId": profile.user_id, "peerId": id})
        .subscribe(response => {this.response = response});
