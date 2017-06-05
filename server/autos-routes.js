@@ -12,8 +12,24 @@ router.route('/')
   });
 })
 
+router.route('/search/')
+//Get an auto by destination
+.post(function (req, res){
+  Auto.find({destinastions.name:req.body.dep}, function(err, auto){
+    if (err){
+      res.send(err);
+    } else {
+      auto.find({destinations.name:req.body.dest}, function (err, result){
+        if(err)
+          res.send(err);
+        res.json(result);
+      })
+    }
+  })
+})
+
 router.route('/owner/:userId')
-// Get an auto
+// Get an auto by owner id
 .get(function(req, res) {
   Auto.findOne({'owner.userId':req.params.userId}, function(err, auto) {
     if (err)
@@ -23,7 +39,7 @@ router.route('/owner/:userId')
 })
 
 router.route('/:id')
-// Modify a auto
+// Modify an auto
 .put(function(req, res) {
   Auto.findById(req.params.id, function(err, auto) {
     if (err)

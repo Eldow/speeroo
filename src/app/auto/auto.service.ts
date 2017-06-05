@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { contentHeaders } from '../auth/auth.headers';
 import { Observable } from 'rxjs/Rx';
-import { Friendlist } from './friendlist.class';
+import { Auto } from './auto.class';
 
 const baseUrl = 'http://localhost:5200/api/autos';
 
@@ -11,46 +11,49 @@ const baseUrl = 'http://localhost:5200/api/autos';
 export class AutoService {
   constructor(public http: Http) {}
 
-  public createAuto(auto: any): Observable<Auto>{
-    let response = this.http.post(baseUrl, auto,
-     {headers:contentHeaders}).map(this.mapAuto.bind(this));;
+  public createAuto(auto: any): Observable<Auto> {
+    const response = this.http.post(baseUrl, auto,
+     {headers: contentHeaders}).map(this.mapAuto.bind(this));
     return response;
   }
 
-  public updateAuto(friendlist: Friendlist): Observable<any>{
-    let response = this.http.put(baseUrl + "/" + encodeURI(friendlist._id), friendlist,
-      {headers:contentHeaders}).map(this.logResponse.bind(this));
-    return response;
-  }
-
-  public retrieveFriendlist(ownerId: string): Observable<any>{
-    let response = this.http.get(baseUrl + "/owner/" + encodeURI(ownerId),
-      {headers:contentHeaders});
-    if(response)
-      response.map(this.mapFriendlist.bind(this));
-    return response;
-  }
-
-  public deleteFriendlist (friendlist: Friendlist): Observable<any>{
-    let response = this.http.delete(baseUrl + "/" + encodeURI(friendlist._id),
+  public updateAuto(auto: Auto): Observable<any> {
+    const response = this.http.put(baseUrl + '/' + encodeURI(auto._id), auto,
       {headers: contentHeaders}).map(this.logResponse.bind(this));
     return response;
   }
 
-  private logResponse(response: Response):any{
+  public retrieveAuto(ownerId: string): Observable<any> {
+    const response = this.http.get(baseUrl + '/owner/' + encodeURI(ownerId),
+      {headers: contentHeaders});
+    if (response) {
+      response.map(this.mapAuto.bind(this));
+    }
+    return response;
+  }
+
+  public deleteFriendlist (auto: Auto): Observable<any> {
+    const response = this.http.delete(baseUrl + '/' + encodeURI(auto._id),
+      {headers: contentHeaders}).map(this.logResponse.bind(this));
+    return response;
+  }
+
+  private logResponse(response: Response): any {
     return response.json();
   }
 
-  private mapFriendlist(response: Response): Friendlist {
-    return this.toFriendlist(response.json().friendlist);
+  private mapAuto(response: Response): Auto {
+    return this.toAuto(response.json().friendlist);
   }
 
-  private toFriendlist(r: any): Friendlist {
-    let friendlist = <Friendlist>({
+  private toAuto(r: any): Auto {
+      const auto = <Auto>({
+      _id: r._id,
       owner: r.owner,
-      list: r.list,
-      _id: r._id
+      clients: r.clients,
+      description: r.description,
+      destinations: r.destination
     })
-    return friendlist;
+    return auto;
   }
 }

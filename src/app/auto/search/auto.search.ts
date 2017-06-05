@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { UserService} from '../../user/user.service';
-import { User } from '../../user/user.class';
 
 @Component({
-  selector: 'friend-search',
-  templateUrl: './friend.search.html',
-  styleUrls: ['./friend.search.css']
+  selector: 'auto-search',
+  templateUrl: './auto.search.html',
+  styleUrls: ['./auto.search.css']
 })
 
-export class FriendSearch {
+export class AutoSearch {
   @Input()
   searchName: string;
   searchResults = [];
@@ -16,7 +15,7 @@ export class FriendSearch {
 
   }
 
-  public searchFriend(){
+  public searchFriend() {
     this.userService.getUsersByName(this.searchName).subscribe(data => this.searchResults = data);
   }
 

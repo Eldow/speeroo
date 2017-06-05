@@ -9,7 +9,7 @@ import { AuthService } from '../auth/auth.service';
 })
 
 export class HomeComponent {
-  constructor (public auth : AuthService){
+  constructor (public auth: AuthService) {
 
   }
 }

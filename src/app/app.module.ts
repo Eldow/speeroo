@@ -11,10 +11,10 @@ import { DndModule } from 'ng2-dnd';
 import { routes } from './app.routes';
 import { HomeComponent } from './home/home.component';
 import { UserService } from './user/user.service';
-import { FriendDetail} from './friend/detail/friend.detail';
-import { FriendList } from './friend/list/friend.list';
-import { FriendSearch } from './friend/search/friend.search';
-import { FriendlistService } from './friend/friendlist.service';
+import { AutoDetail} from './auto/detail/auto.detail';
+import { AutoList } from './auto/list/auto.list';
+import { AutoSearch } from './auto/search/auto.search';
+import { AutoService } from './auto/auto.service';
 import { LoginComponent } from './login/login.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -23,7 +23,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, FriendDetail, FriendList, FriendSearch,
+    AppComponent, HomeComponent, AutoDetail, AutoList, AutoSearch,
     LoginComponent
   ],
   imports: [
@@ -32,7 +32,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DndModule.forRoot()
   ],
   providers: [
-    AuthGuard, AuthService, UserService, FriendlistService, {
+    AuthGuard, AuthService, UserService, AutoService, {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [ Http, RequestOptions ]

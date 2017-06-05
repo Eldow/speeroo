@@ -9,14 +9,14 @@ import { UserService } from '../user/user.service';
 export class AuthService {
   lock = new Auth0Lock(AuthConfig.clientID, AuthConfig.domain, {
     theme: {
-      primaryColor: "#005375"
+      primaryColor: '#005375'
     },
     auth: {
       responseType: 'token',
       redirectUrl: 'http://localhost:4200/'
     },
     languageDictionary: {
-      title: "Have fun on Speeroo >:3"
+      title: 'Have fun on Speeroo >:3'
     }
   });
   response: any;
@@ -37,12 +37,12 @@ export class AuthService {
       localStorage.setItem('profile', JSON.stringify(profile));
       localStorage.setItem('accessToken', authResult.accessToken);
       if(profile.signed_up){
-        console.log("Enjoy your journey on Speeroo, " + profile.nickname);
-        this.userService.createUser({"name": profile.nickname, "userId": profile.user_id, "peerId": ""}).subscribe(data => {
+        console.log('Enjoy your journey on Speeroo, ' + profile.nickname);
+        this.userService.createUser({'name': profile.nickname, 'userId': profile.user_id, 'peerId': ''}).subscribe(data => {
           this.response = data.message;
         });
       } else {
-        console.log("Welcome back, " + profile.nickname);
+        console.log('Welcome back, ' + profile.nickname);
       }
       this.router.navigate(['home']);
     });

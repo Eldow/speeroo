@@ -6,8 +6,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     name: String,
-    userId: String,
-    peerId: String
+    userId: String
 });
 
 module.exports = mongoose.model('User', UserSchema );

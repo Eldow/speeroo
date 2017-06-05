@@ -9,8 +9,8 @@ import { AuthService } from './auth/auth.service'
 })
 
 export class AppComponent {
+  title = 'Welcome on Speeroo';
+
   constructor(public router: Router, public auth: AuthService) {
   }
-
-  title = 'Welcome on Speeroo';
 }
