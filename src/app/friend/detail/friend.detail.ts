@@ -32,7 +32,6 @@ export class FriendDetail implements OnInit{
     // Send stream to my video container
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.myVideo.src = URL.createObjectURL(stream);
-      this.mediaStream = stream;
     }, err => { console.log(err); });
 
     // Fill the peerId of each friend
@@ -49,7 +48,6 @@ export class FriendDetail implements OnInit{
     this.peer.on('call', call => {
       this.isCalling = true;
       this.currentCall = call;
-      this.displayTheirStream(call);
     });
 
   }
@@ -57,14 +55,20 @@ export class FriendDetail implements OnInit{
   // Call a friend
   public call(friend:User){
     this.callAccepted = true;
-    this.currentCall = this.peer.call(friend.peerId, this.mediaStream);
+    this.n.getUserMedia({audio: true, video: true}, stream => {
+      this.currentCall = this.peer.call(friend.peerId, stream);
+    }, err => { console.log(err); });
+
     this.displayTheirStream(this.currentCall);
   }
 
   // Answer a call
   public answer(friend:User){
     this.callAccepted = true;
-    this.currentCall.answer(this.mediaStream);
+    this.n.getUserMedia({audio: true, video: true}, stream => {
+      this.currentCall.answer(stream);
+    }, err => { console.log(err); });
+
     this.displayTheirStream(this.currentCall);
   }
 
