@@ -15,11 +15,11 @@ router.route('/')
 router.route('/search/')
 //Get an auto by destination
 .post(function (req, res){
-  Auto.find({destinastions.name:req.body.dep}, function(err, auto){
+  Auto.find({'destinations.name':req.body.dep}, function(err, auto){
     if (err){
       res.send(err);
     } else {
-      auto.find({destinations.name:req.body.dest}, function (err, result){
+      auto.find({'destinations.name':req.body.dest}, function(err, result){
         if(err)
           res.send(err);
         res.json(result);
