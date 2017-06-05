@@ -13,8 +13,8 @@ export class FriendDetail implements OnInit{
   @ViewChild('theirVideo') theirVideo: any;
   @Input() friend: User;
   @Input() peer: any;
-  mediaStream: any;
   n = <any>navigator;
+  w = <any>window;
   isCalling: boolean;
   callAccepted: boolean;
   currentCall: any;
@@ -32,6 +32,7 @@ export class FriendDetail implements OnInit{
     // Send stream to my video container
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.myVideo.src = URL.createObjectURL(stream);
+      this.w.localStream = stream;
     }, err => { console.log(err); });
 
     // Fill the peerId of each friend
@@ -55,23 +56,18 @@ export class FriendDetail implements OnInit{
   // Call a friend
   public call(friend:User){
     this.callAccepted = true;
-    this.n.getUserMedia({audio: true, video: true}, stream => {
-      this.currentCall = this.peer.call(friend.peerId, stream);
-    }, err => { console.log(err); });
-
-    this.displayTheirStream.bind(this.currentCall);
+    this.currentCall = this.peer.call(friend.peerId, this.w.localStream);
+    this.displayTheirStream(this.currentCall);
   }
 
   // Answer a call
-  public answer(friend:User){
+  public answer(){
     this.callAccepted = true;
-    this.n.getUserMedia({audio: true, video: true}, stream => {
-      this.currentCall.answer(stream);
-    }, err => { console.log(err); });
-
-    this.displayTheirStream.bind(this.currentCall);
+    this.currentCall.answer(this.w.localStream);
+    this.displayTheirStream(this.currentCall);
   }
 
+  // Display your friend's stream
   private displayTheirStream(call: any){
     console.log(call);
     call.on('stream', stream => {
@@ -82,7 +78,7 @@ export class FriendDetail implements OnInit{
   }
 
   // Decline a call
-  public decline(friend:User){
+  public decline(){
     this.currentCall.close();
     this.callAccepted = false;
     this.isCalling = false;
