@@ -1,9 +1,0 @@
-<div *ngIf="friendlist">
-  <div *ngFor = "let f of friendlist.list">
-    <friend-detail (friendCalled)="onFriendCalled(f)" [friend]="f"></friend-detail>
-  </div>
-</div>
-
-<!-- Video area -->
-<video #myVideo autoplay></video>
-<video #theirVideo autoplay></video>

@@ -15,7 +15,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Get our API routes
 const users = require('./server/users-routes');
-const friendlists = require('./server/friendlist-routes');
+const autos = require('./server/autos-routes');
 const app = express();
 
 // Error handling
@@ -47,7 +47,12 @@ app.use(function (req, res, next) {
 
 // Set our api routes
 app.use('/api/users', users);
-app.use('/api/friendlists', friendlists);
+app.use('/api/autos', autos);
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 /**
  * Get port from environment and store in Express.
@@ -59,16 +64,6 @@ app.set('port', port);
  * Create HTTP server.
  */
 const server = http.createServer(app);
-const options = { debug: true };
-app.use('/peerjs', expressPeerServer(server, options));
-
-// Catch all other routes and return the index file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
-app.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
 
 /**
  * Listen on provided port, on all network interfaces.
