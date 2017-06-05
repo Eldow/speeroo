@@ -49,6 +49,12 @@ export class FriendDetail implements OnInit{
     this.peer.on('call', call => {
       this.isCalling = true;
       this.currentCall = call;
+      this.n.getUserMedia({audio: true, video: true}, stream => {
+        this.myVideo.src = URL.createObjectURL(stream);
+        this.w.localStream = stream;
+        call.answer(stream);
+        this.displayTheirStream(call);
+      }, err => { console.log(err); });
     });
 
   }
