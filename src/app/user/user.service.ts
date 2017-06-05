@@ -5,7 +5,7 @@ import { contentHeaders } from '../auth/auth.headers';
 import { Observable } from 'rxjs/Rx';
 import { User } from './user.class';
 
-const baseUrl = 'https://speeroo.herokuapp.com/api/users';
+const baseUrl = 'http://localhost:5200/api/users';
 
 @Injectable()
 export class UserService {

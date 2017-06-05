@@ -13,7 +13,7 @@ export class AuthService {
     },
     auth: {
       responseType: 'token',
-      redirectUrl: 'https://speeroo.herokuapp.com/'
+      redirectUrl: 'http://localhost:4200/'
     },
     languageDictionary: {
       title: "Have fun on Speeroo >:3"

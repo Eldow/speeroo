@@ -1,1 +1,27 @@
-<button *ngIf="!auth.authenticated()" type = "submit" (click)="login()">Log In</button>
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
+  <button class="navbar-toggler navbar-toggler-right" type="button"
+    data-toggle="collapse" data-target="#navbarColor01"
+    aria-controls="navbarColor01" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Speeroo</a>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+   </ul>
+    <form class="form-inline">
+      <button class="btn btn-success my-2 my-sm-0" *ngIf="!auth.authenticated()"
+      type = "submit" (click)="login()">Log In</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="jumbotron margined-top">
+    <h1 class="display-3">Speeroo</h1>
+    <p>A simple application peer to peer to chat with your friens all around the world. Try it out for free now !</p>
+    <p *ngIf="!auth.authenticated()">
+      <button class="btn btn-primary btn-lg" (click)="login()">Log In</button>
+    </p>
+  </div>
+</div>

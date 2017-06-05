@@ -1,1 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+.title-green-background{
+  border-bottom-width: 2px;
+  vertical-align: bottom;
+  border-bottom: 2px solid;
+  background-color: #78C2AD;
+  font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #fff;
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: bold;
+  display: table-cell;
+}
+
+.table-cell-custom{
+  padding: 0.5em;
+}
+
+.name-block{
+  padding-right: 1em;
+}
+
+.btn:hover{
+  cursor:pointer;
+}
+
+.parent-flex{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #78C2AD;
+}
+.loader{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  position: relative;
+  margin: auto;
+}
+
+#custom-loader span{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: #fff;
+  margin: 35px 5px;
+}
+
+#custom-loader span:nth-child(1){
+  animation: bounce 1s ease-in-out infinite;
+}
+
+#custom-loader span:nth-child(2){
+  animation: bounce 1s ease-in-out 0.33s infinite;
+}
+
+#custom-loader span:nth-child(3){
+  animation: bounce 1s ease-in-out 0.66s infinite;
+}
+
+@keyframes bounce{
+  0%, 75%, 100%{
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  25%{
+    -webkit-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    -o-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+}

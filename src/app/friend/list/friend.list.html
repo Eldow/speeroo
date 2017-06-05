@@ -1,5 +1,10 @@
-<div *ngIf="friendlist">
-  <div *ngFor = "let f of friendlist.list">
-    <friend-detail [friend]="f" [peer]="peer"></friend-detail>
+<div *ngIf="friendlist" class="row">
+  <div class="table table-striped table-hover">
+    <div class="title-green-background">
+      <i class="fa fa-lg fa-address-book"></i> Friendlist
+    </div>
+    <tr *ngFor = "let f of friendlist.list">
+      <friend-detail [friend]="f" [peer]="peer"></friend-detail>
+    </tr>
   </div>
 </div>

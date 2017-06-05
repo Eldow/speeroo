@@ -39,9 +39,6 @@ export class FriendDetail implements OnInit{
       // Send messages
       conn.send('Hello!');
     });*/
-    console.log(this.peer);
-    console.log(conn);
-
     conn.on('open', function(){
       console.log("connect to peer");
       conn.send("Hello");
