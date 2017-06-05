@@ -100,7 +100,15 @@ export class FriendList {
 
     this.n.getUserMedia({audio: true, video: true}, stream => {
       this.myVideo.src = URL.createObjectURL(stream);
-      let call = this.peer.call(friend.peerId, stream);
+      let options = {
+        'constraints': {
+          'mandatory': {
+            'OfferToReceiveAudio': true,
+            'OfferToReceiveVideo': true
+          }
+        }
+      }
+      let call = this.peer.call(friend.peerId, stream, options);
       call.on('stream', stream => {
         this.theirVideo.src = URL.createObjectURL(stream);
       }, err => {
