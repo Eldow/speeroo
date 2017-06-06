@@ -27,7 +27,7 @@ export class AutoService {
     const response = this.http.get(baseUrl + '/owner/' + encodeURI(ownerId),
       {headers: contentHeaders});
     if (response) {
-      response.map(this.mapAuto.bind(this));
+      response.map(this.mapAutos.bind(this));
     }
     return response;
   }
@@ -36,14 +36,14 @@ export class AutoService {
     const response = this.http.get(baseUrl + '/client/' + encodeURI(clientId),
       {headers: contentHeaders});
     if (response) {
-      response.map(this.mapAuto.bind(this));
+      response.map(this.mapAutos.bind(this));
     }
     return response;
   }
 
-  public retrieveAutosByDestinations(from: string, to: string): Observable<Auto[]>{
+  public retrieveAutosByDestinations(from: string, to: string): Observable<Auto[]> {
     const response = this.http.post(baseUrl + '/search/', { 'dep': from, 'dest': to },
-      {headers: contentHeaders}).map(this.mapAuto.bind(this));
+      {headers: contentHeaders}).map(this.mapAutos.bind(this));
     return response;
   }
 
@@ -58,7 +58,11 @@ export class AutoService {
   }
 
   private mapAuto(response: Response): Auto {
-    return this.toAuto(response.json().friendlist);
+    return this.toAuto(response.json());
+  }
+
+  private mapAutos(response: Response): Auto[] {
+    return response.json().map(this.toAuto.bind(this));
   }
 
   private toAuto(r: any): Auto {

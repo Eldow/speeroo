@@ -15,7 +15,13 @@ export class AutoSearch {
   searchDest: string;
   searchDestResults = [];
   nowDate: Date;
-  constructor(public locationService: LocationService) {
+  seatsNumber: number;
+  showPets: boolean;
+  showSmoker: boolean;
+  showMusic: boolean;
+  searchResult: any;
+
+  constructor(public autoService: AutoService, public locationService: LocationService) {
       this.nowDate = new Date();
   }
 
@@ -54,9 +60,16 @@ export class AutoSearch {
   }
 
   public isSearchFormValid() {
-      if (this.isDepValid() && this.isDestValid()) {
+      if (this.isDepValid() && this.isDestValid() && this.seatsNumber >= 1) {
           return true;
       }
       return false;
+  }
+
+  public searchAuto() {
+      this.autoService.retrieveAutosByDestinations(this.searchDep, this.searchDest).subscribe(data => {
+          console.log(data);
+          this.searchResult = data;
+      });
   }
 }

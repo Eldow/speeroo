@@ -1,47 +1,92 @@
-<form (ngSubmit)="postAuto()" class="col-md-4">
-  <h2>Begin a new trip !</h2>
-  <label for="description" class="col-form-label col-form-label-sm"> Description </label>
-  <input id="description" name="description" type="textarea" [(ngModel)]="auto.description" class="form-control"
-         placeholder="Enter a quick description of your offer."/>
-  <label for="destinationName" class="col-form-label col-form-label-sm"> Destinations </label>
-  <input id="destinationName" name="destinationName" type="text"
-         [(ngModel)]="destinationName" class="form-control"
-         placeholder="Enter a city name."/>
-  <input name="destinationDate" type="datetime-local" class="form-control"
-         min="{{ minDate | date: 'yyyy-MM-ddTHH:mm'}}" value="{{minDate | date: 'yyyy-MM-ddTHH:mm'}}"
-         [ngModel]="destinationDate | date: 'yyyy-MM-ddTHH:mm'"/>
-  <button class="btn btn-info" (click)="addDestination()">Add</button>
-  <div *ngFor="let d of auto.destinations">
-    <p> {{ d.name }} </p>
-    <p> {{ d.date }} </p>
-    <button class="btn btn-info" (click)="removeDestination(d)">Delete</button>
+<div class="container-fluid row">
+  <form (ngSubmit)="postAuto()" class="col-xs-12 col-md-3">
+
+    <label for="description" class="col-form-label col-form-label-sm"> Description </label>
+    <div class="form-group has-danger" [ngClass]="{'has-danger': !auto.description}">
+      <input id="description" name="description" type="textarea" [(ngModel)]="auto.description"
+             class="form-control" required placeholder="Enter a quick description of your offer."
+             [ngClass]="{'form-control-danger': !auto.description}"/>
+    </div>
+    <div>
+      <label for="destinationName" class="col-form-label col-form-label-sm"> Destinations </label>
+      <div class="form-group has-danger" [ngClass]="{'has-danger': !isDestValid() && destinationName}">
+        <div class="dropdown">
+          <input class="form-control dropdown-toggle" autocomplete="off" required placeholder="Enter a city name."
+                 [ngClass]="{'form-control-danger': !isDestValid()}" type="text" [(ngModel)]="destinationName"
+                 name="searchInputDest" id="destinationName" data-toggle="dropdown" (ngModelChange)="updateDestCities()"/>
+          <ul class="dropdown-menu form-control" *ngIf="searchDestResults.length > 0">
+            <li *ngFor="let dest of searchDestResults" (click)="setSearchDest(dest.matching_full_name)">{{dest.matching_full_name}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <label for="destinationDate" class="col-form-label col-form-label-sm"> Departure date and hour </label>
+      <input name="destinationDate" type="datetime-local" class="form-control col-xs-10"
+             min="{{ minDate | date: 'yyyy-MM-ddTHH:mm'}}" value="{{minDate | date: 'yyyy-MM-ddTHH:mm'}}"
+             [ngModel]="destinationDate | date: 'yyyy-MM-ddTHH:mm'" id="destinationDate"/>
+      <div><br>
+        <button class="btn btn-info col-xs-2" (click)="addDestination()" [class.disabled]="!isDestinationValid()">Add</button>
+      </div>
+      <br>
+    </div>
+
+    <label for="seats" class="col-form-label col-form-label-sm"> Seats </label>
+    <input id="seats" name="seats" class="form-control" type="number"
+           min="1" max="8" [(ngModel)]="auto.constraints.seats">
+    <label for="pets" class="col-form-label col-form-label-sm"> Pets </label>
+
+    <div id="pets" class="form-check">
+      <label class="form-check-label">
+        <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="auto.constraints.pets"/>
+        <p *ngIf="auto.constraints.pets">Allowed</p>
+        <p *ngIf="!auto.constraints.pets">Not Allowed</p>
+      </label>
+    </div>
+
+    <label for="smoker" class="col-form-label col-form-label-sm"> Smoking </label>
+    <div id="smoker" class="form-check">
+      <label class="form-check-label">
+        <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="auto.constraints.smoker"/>
+        <p *ngIf="auto.constraints.smoker">Allowed</p>
+        <p *ngIf="!auto.constraints.smoker">Not Allowed</p>
+      </label>
+    </div>
+
+    <label for="music" class="col-form-label col-form-label-sm"> Music </label>
+    <div id="music" class="form-check">
+      <label class="form-check-label">
+        <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="auto.constraints.music"/>
+        <p *ngIf="auto.constraints.music">Allowed</p>
+        <p *ngIf="!auto.constraints.music">Not Allowed</p>
+      </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit"  [class.disabled]="!isPostFormValid()" (click)="postAuto()">Post</button>
+  </form>
+  <div class="col-xs-12 col-md-9">
+    <div class="container-fluid">
+      <div class="row">
+        <div *ngFor="let d of auto.destinations; let isFirst = first; let isLast = last" class="col-md-3 col-xs-6">
+          <div *ngIf="isFirst">
+            <h4>Departure</h4>
+          </div>
+          <div *ngIf="isLast && !isFirst">
+            <h4>Arrival</h4>
+          </div>
+          <div *ngIf="!isFirst && !isLast">
+            <h5>Step</h5>
+          </div>
+          <div>
+            City : {{ d.name }}
+          </div>
+          <div>
+            Hour : {{ d.date | date:'dd-MM-yyyy HH:mm'}}
+          </div>
+          <div class="row">
+            <button class="btn btn-info" (click)="removeDestination(d)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <label for="seats" class="col-form-label col-form-label-sm"> Seats </label>
-  <input id="seats" name="seats" class="form-control" type="number"
-         min="1" max="12" [(ngModel)]="auto.constraints.seats">
-  <label for="pets" class="col-form-label col-form-label-sm"> Pets </label>
-  <div id="pets" class="form-check">
-    <label class="form-check-label">
-      <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="auto.constraints.pets"/>
-      <p *ngIf="auto.constraints.pets">Allowed</p>
-      <p *ngIf="!auto.constraints.pets">Not Allowed</p>
-    </label>
-  </div>
-  <label for="smoker" class="col-form-label col-form-label-sm"> Smoking </label>
-  <div id="smoker" class="form-check">
-    <label class="form-check-label">
-      <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="auto.constraints.smoker"/>
-      <p *ngIf="auto.constraints.smoker">Allowed</p>
-      <p *ngIf="!auto.constraints.smoker">Not Allowed</p>
-    </label>
-  </div>
-  <label for="music" class="col-form-label col-form-label-sm"> Music </label>
-  <div id="music" class="form-check">
-    <label class="form-check-label">
-      <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="auto.constraints.music"/>
-      <p *ngIf="auto.constraints.music">Allowed</p>
-      <p *ngIf="!auto.constraints.music">Not Allowed</p>
-    </label>
-  </div>
-  <button class="btn btn-primary" type="submit" (click)="postAuto()">Post</button>
-</form>
+</div>

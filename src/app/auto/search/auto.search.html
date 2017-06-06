@@ -1,19 +1,13 @@
-<div class="col-lg-4 col-md-5 col-sm-12">
-    <div class="container-full">
-        <auto-list #autolist></auto-list>
-    </div>
-    <form name="searchForm" (ngSubmit)="searchFriend()" class="row">
+<div class="container-fluid row">
+    <form name="searchForm" (ngSubmit)="searchAuto()" class="col-sm-12 col-md-3">
         <fieldset>
-            <div class="title-green-background">
-                <h4>Search for a carpooling</h4>
-            </div>
             <div id="inputSearch" >
                 <label class="col-form-label col-form-label-sm" for="inputDep">
                     Departure
                 </label>
                 <div class="form-group has-danger" [ngClass]="{'has-danger': !isDepValid() && searchDep}">
                     <div class="dropdown">
-                        <input class="form-control dropdown-toggle" autocomplete="off" required
+                        <input class="form-control dropdown-toggle" autocomplete="off" required placeholder="Enter a city name."
                                [ngClass]="{'form-control-danger': !isDepValid()}" type="text" [(ngModel)]="searchDep"
                                name="searchInputDep" id="inputDep" data-toggle="dropdown" (ngModelChange)="updateDepCities()"/>
                         <ul class="dropdown-menu form-control" *ngIf="searchDepResults.length > 0">
@@ -26,7 +20,7 @@
                 </label>
                 <div class="form-group has-danger" [ngClass]="{'has-danger': !isDestValid() && searchDest}">
                     <div class="dropdown">
-                        <input class="form-control dropdown-toggle" autocomplete="off" required
+                        <input class="form-control dropdown-toggle" autocomplete="off" required placeholder="Enter a city name."
                                [ngClass]="{'form-control-danger': !isDestValid()}" type="text" [(ngModel)]="searchDest"
                                name="searchInputDest" id="inputDest" data-toggle="dropdown" (ngModelChange)="updateDestCities()"/>
                         <ul class="dropdown-menu form-control" *ngIf="searchDestResults.length > 0">
@@ -41,13 +35,46 @@
                 </label>
                 <div>
                     <input type="datetime-local" id="departureDate" min="{{nowDate | date:'yyyy-MM-ddTHH:mm'}}"
-                           value="{{nowDate | date:'yyyy-MM-ddTHH:mm'}}">
+                           value="{{nowDate | date:'yyyy-MM-ddTHH:mm'}}" class="form-control">
                 </div>
             </div>
-            {{nowDate | date:'yyyy-MM-ddTHH:mm'}}
+            <div>
+                <label for="seats" class="col-form-label col-form-label-sm"> Seats </label>
+                <div>
+                    <input id="seats" name="seats" class="form-control" type="number" required
+                           min="1" max="8" [(ngModel)]="seatsNumber">
+                </div>
+            </div>
+            <label for="pets" class="col-form-label col-form-label-sm"> Pets </label>
+            <div id="pets" class="form-check">
+                <label class="form-check-label">
+                    <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="showPets"/>
+                    <p *ngIf="showPets">Allowed</p>
+                    <p *ngIf="!showPets">Not Allowed</p>
+                </label>
+            </div>
+            <label for="smoker" class="col-form-label col-form-label-sm"> Smoking </label>
+            <div id="smoker" class="form-check">
+                <label class="form-check-label">
+                    <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="showSmoker"/>
+                    <p *ngIf="showSmoker">Allowed</p>
+                    <p *ngIf="!showSmoker">Not Allowed</p>
+                </label>
+            </div>
+            <label for="music" class="col-form-label col-form-label-sm"> Music </label>
+            <div id="music" class="form-check">
+                <label class="form-check-label">
+                    <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="showMusic"/>
+                    <p *ngIf="showMusic">Allowed</p>
+                    <p *ngIf="!showMusic">Not Allowed</p>
+                </label>
+            </div>
             <button class="btn btn-info col-xs-4" [class.disabled]="!isSearchFormValid()" type="submit">
                 <i class="fa fa-lg fa-search"></i>
             </button>
         </fieldset>
     </form>
+    <div class="col-sm-12 col-md-9">
+        <auto-list [autos]="searchResult"></auto-list>
+    </div>
 </div>
