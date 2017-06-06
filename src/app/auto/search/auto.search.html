@@ -35,7 +35,7 @@
                 </label>
                 <div>
                     <input type="datetime-local" id="departureDate" min="{{nowDate | date:'yyyy-MM-ddTHH:mm'}}"
-                           value="{{nowDate | date:'yyyy-MM-ddTHH:mm'}}" class="form-control">
+                           [(ngModel)]="nowDate" class="form-control" name="inputDateSearch">
                 </div>
             </div>
             <div>
@@ -45,7 +45,8 @@
                            min="1" max="8" [(ngModel)]="seatsNumber">
                 </div>
             </div>
-            <label for="pets" class="col-form-label col-form-label-sm"> Pets </label>
+            <label for="pets" class="col-form-label col-form-label-sm">
+                Pets </label>
             <div id="pets" class="form-check">
                 <label class="form-check-label">
                     <input name="pets" type="checkbox" class="form-check-input" [(ngModel)]="showPets"/>
@@ -75,6 +76,6 @@
         </fieldset>
     </form>
     <div class="col-sm-12 col-md-9">
-        <auto-list [autos]="searchResult"></auto-list>
+        <auto-list [autos]="searchResult" [constraints]="constraints" [isSearch]>="isSearch"</auto-list>
     </div>
 </div>

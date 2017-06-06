@@ -23,7 +23,7 @@ export class AutoPost {
         }
     } as Auto;
     destinationName: string;
-    destinationDate = Date.now();
+    destinationDate: any;
     minDate = Date.now();
 
     constructor(public locationService: LocationService, public autoService: AutoService) {

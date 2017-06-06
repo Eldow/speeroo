@@ -10,6 +10,8 @@
       <div *ngIf="!auto.constraints.pets">Pets not allowed</div>
       <div *ngIf="auto.constraints.smoker">Smoking allowed</div>
       <div *ngIf="!auto.constraints.smoker">Smoking not allowed</div>
+      <div *ngIf="auto.constraints.music">Music allowed</div>
+      <div *ngIf="!auto.constraints.music">Music not allowed</div>
       <footer>Author : {{ auto.owner.name }}</footer>
       Seats number :
       <input  *ngIf="!isClient() && !isOwner()" id="seats" name="seats" class="form-control" type="number" required

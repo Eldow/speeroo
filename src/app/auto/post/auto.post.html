@@ -21,9 +21,9 @@
       </div>
 
       <label for="destinationDate" class="col-form-label col-form-label-sm"> Departure date and hour </label>
-      <input name="destinationDate" type="datetime-local" class="form-control col-xs-10"
-             min="{{ minDate | date: 'yyyy-MM-ddTHH:mm'}}" value="{{minDate | date: 'yyyy-MM-ddTHH:mm'}}"
-             [ngModel]="destinationDate | date: 'yyyy-MM-ddTHH:mm'" id="destinationDate"/>
+      <input name="destinationDate" type="datetime-local" class="form-control"
+             min="{{ minDate | date: 'yyyy-MM-ddTHH:mm'}}"
+             [(ngModel)]="destinationDate" id="destinationDate"/>
       <div><br>
         <button class="btn btn-info col-xs-2" (click)="addDestination()" [class.disabled]="!isDestinationValid()">Add</button>
       </div>
