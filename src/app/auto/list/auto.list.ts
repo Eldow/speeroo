@@ -26,11 +26,9 @@ export class AutoList {
     let dateDep = false;
     let dateDest = false;
 
-    if (!this.isSearch) {
+    if (this.constraints === undefined) {
       return true;
     }
-
-    console.log(auto.destinations);
 
     if (auto.constraints.showPets !== this.constraints.pets) {
       return false;
@@ -39,6 +37,14 @@ export class AutoList {
       return false;
     }
     if (auto.constraints.showSmoker !== this.constraints.smoker) {
+      return false;
+    }
+
+    if (auto.constraints.seats === 0) {
+      return false;
+    }
+
+    if (auto.constraints.seats - this.constraints.seatsNumber < 0) {
       return false;
     }
     indexDep = auto.destinations.findIndex(d => d.name === this.constraints.dep);
@@ -52,26 +58,21 @@ export class AutoList {
       return false;
     }
 
-    if (auto.destinations[indexDep].date.getFullYear() === this.constraints.date.getFullYear() &&
-      auto.destinations[indexDep].date.getMonth() === this.constraints.date.getMonth() &&
-        auto.destinations[indexDep].date.getDay() === this.constraints.date.getDay()) {
+    if (new Date(auto.destinations[indexDep].date).getFullYear() === new Date(this.constraints.date).getFullYear() &&
+      new Date(auto.destinations[indexDep].date).getMonth() === new Date(this.constraints.date).getMonth() &&
+      new Date(auto.destinations[indexDep].date).getDay() === new Date(this.constraints.date).getDay()) {
       dateDep = true;
     }
 
-    if (auto.destinations[indexDest].date.getFullYear() === this.constraints.date.getFullYear() &&
-        auto.destinations[indexDest].date.getMonth() === this.constraints.date.getMonth() &&
-        auto.destinations[indexDest].date.getDay() === this.constraints.date.getDay()) {
+    if (new Date(auto.destinations[indexDest].date).getFullYear() === new Date(this.constraints.date).getFullYear() &&
+      new Date(auto.destinations[indexDest].date).getMonth() === new Date(this.constraints.date).getMonth() &&
+      new Date(auto.destinations[indexDest].date).getDay() === new Date(this.constraints.date).getDay()) {
       dateDest = true;
     }
 
     if (!dateDest && !dateDep) {
       return false;
     }
-
-    if (auto.constraints.seats === 0) {
-      return false;
-    }
-
     return true;
   }
 }
