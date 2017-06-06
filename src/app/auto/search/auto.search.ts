@@ -68,17 +68,20 @@ export class AutoSearch {
   }
 
   public searchAuto() {
-      this.constraints = {
-          dep: this.searchDep,
-          dest: this.searchDest,
-          date: this.nowDate,
-          seats: this.seatsNumber,
-          pets: this.showPets,
-          smoker: this.showSmoker,
-          music: this.showMusic
-      };
-      this.autoService.retrieveAutosByDestinations(this.searchDep, this.searchDest).subscribe(data => {
-          this.searchResult = data;
-      });
+    if (!this.isSearchFormValid()) {
+      return;
+    }
+    this.constraints = {
+        dep: this.searchDep,
+        dest: this.searchDest,
+        date: this.nowDate,
+        seats: this.seatsNumber,
+        pets: this.showPets,
+        smoker: this.showSmoker,
+        music: this.showMusic
+    };
+    this.autoService.retrieveAutosByDestinations(this.searchDep, this.searchDest).subscribe(data => {
+        this.searchResult = data;
+    });
   }
 }

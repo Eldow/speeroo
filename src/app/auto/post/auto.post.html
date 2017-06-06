@@ -62,6 +62,10 @@
     </div>
 
     <button class="btn btn-primary" type="submit"  [class.disabled]="!isPostFormValid()" (click)="postAuto()">Post</button>
+    <div *ngIf="isPosted" class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Well done!</strong> You successfully created your trip !.
+    </div>
   </form>
   <div class="col-xs-12 col-md-9">
     <div class="container-fluid">

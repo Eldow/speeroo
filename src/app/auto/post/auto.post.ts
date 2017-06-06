@@ -25,11 +25,13 @@ export class AutoPost {
     destinationName: string;
     destinationDate: any;
     minDate = Date.now();
+    isPosted = false;
 
     constructor(public locationService: LocationService, public autoService: AutoService) {
     }
 
     public addDestination(d: any) {
+        this.isPosted = false;
         this.auto.destinations.push({ 'name': this.destinationName, 'date': this.destinationDate});
     }
 
@@ -41,7 +43,7 @@ export class AutoPost {
     public postAuto() {
       const profile = JSON.parse(localStorage.getItem(('profile')));
       this.auto.owner = { 'name': profile.nickname, 'userId': profile.user_id };
-      this.autoService.createAuto(this.auto).subscribe(() => { });
+      this.autoService.createAuto(this.auto).subscribe(() => { this.isPosted = true; });
     }
 
     public updateDestCities() {

@@ -5,7 +5,7 @@ import { contentHeaders } from '../auth/auth.headers';
 import { Observable } from 'rxjs/Rx';
 import { Auto } from './auto.class';
 
-const baseUrl = 'http://localhost:5200/api/autos';
+const baseUrl = 'https://speeroo.herokuapp.com/api/autos';
 
 @Injectable()
 export class AutoService {
