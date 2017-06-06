@@ -10,6 +10,8 @@
       <div *ngIf="!auto.constraints.pets">Pets not allowed</div>
       <div *ngIf="auto.constraints.smoker">Smoking allowed</div>
       <div *ngIf="!auto.constraints.smoker">Smoking not allowed</div>
+      <div *ngIf="auto.constraints.music">Music allowed</div>
+      <div *ngIf="!auto.constraints.music">Music not allowed</div>
       <footer>Author : {{ auto.owner.name }}</footer>
       <button *ngIf="!isClient() && !isOwner()" class="btn btn-primary" type="submit" (click)="joinAuto()"> Join </button>
       <button *ngIf="isOwner()" class="btn btn-primary" type="submit" (click)="deleteAuto()"> Delete </button>

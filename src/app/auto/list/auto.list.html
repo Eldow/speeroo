@@ -1,3 +1,3 @@
 <div *ngFor = "let a of autos">
-  <auto-detail (autoDeleted)="onAutoDeleted(a)" [auto]="a"></auto-detail>
+  <auto-detail (autoDeleted)="onAutoDeleted(a)" [auto]="a" *ngIf="isAutoValid(a)"></auto-detail>
 </div>

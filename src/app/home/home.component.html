@@ -37,10 +37,10 @@
     <div class="tab-pane fade" id="trips">
       <div class="container-fluid">
       <h1 class="text-primary" *ngIf="ownedTrips.length>0">Owned trips</h1>
-      <auto-list [autos]="ownedTrips"></auto-list>
+      <auto-list [autos]="ownedTrips" [isSearch]>="isSearch"></auto-list>
       <h1 class="text-primary" *ngIf="clientTrips.length>0">Client trips</h1>
-      <auto-list [autos]="clientTrips"></auto-list>
-      <h1 class="text-primary" *ngIf="ownedTrips.length===0 && ownedTrips.length===0">You have no trips yet.</h1>
+      <auto-list [autos]="clientTrips" [isSearch]>="isSearch"></auto-list>
+      <h2 class="text-primary" *ngIf="ownedTrips.length===0 && ownedTrips.length===0">You have no trips yet.</h2>
       </div>
     </div>
 </div>

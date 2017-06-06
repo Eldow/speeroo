@@ -12,6 +12,7 @@ import {AutoService} from '../auto/auto.service';
 export class HomeComponent {
   ownedTrips = [];
   clientTrips = [];
+  isSearch = false;
   constructor (public auth: AuthService, public auto: AutoService) {
     const profile = JSON.parse(localStorage.getItem('profile'));
     auto.retrieveAutosByClientship(profile.user_id).subscribe(clientAutos => {
