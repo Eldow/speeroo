@@ -1,3 +1,5 @@
-<div *ngFor = "let a of autos">
-  <auto-detail (autoDeleted)="onAutoDeleted(a)" [auto]="a" *ngIf="isAutoValid(a)"></auto-detail>
+<div class="row">
+  <div *ngFor = "let a of autos" class="col-md-3">
+    <auto-detail (autoDeleted)="onAutoDeleted(a)" [auto]="a" *ngIf="isAutoValid(a)"></auto-detail>
+  </div>
 </div>
