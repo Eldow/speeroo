@@ -26,11 +26,13 @@ export class AutoList {
     let dateDep = false;
     let dateDest = false;
 
-    if (this.constraints === undefined) {
-      return true;
-    }
     console.log(auto.constraints);
     console.log(this.constraints);
+
+    if (this.constraints == undefined) {
+      return true;
+    }
+
     if (auto.constraints.pets !== this.constraints.pets) {
       return false;
     }
