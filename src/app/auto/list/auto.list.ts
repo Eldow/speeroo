@@ -30,6 +30,14 @@ export class AutoList {
       return true;
     }
 
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const index = auto.clients.findIndex(c =>
+      c.userId === profile.user_id
+    );
+    if (index !== -1) {
+      return true;
+    }
+
     if (auto.constraints.pets !== this.constraints.pets) {
       return false;
     }
