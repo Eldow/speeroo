@@ -53,6 +53,7 @@ router.route('/:id')
       auto.owner = req.body.owner;
       auto.description = req.body.description;
       auto.clients = req.body.clients;
+      auto.constraints = req.body.constraints;
       auto.save(function(err) {
         if (err)
           res.send(err);
