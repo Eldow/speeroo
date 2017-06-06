@@ -68,7 +68,6 @@ export class AutoSearch {
 
   public searchAuto() {
       this.autoService.retrieveAutosByDestinations(this.searchDep, this.searchDest).subscribe(data => {
-          console.log(data);
           this.searchResult = data;
       });
   }

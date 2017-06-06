@@ -12,6 +12,7 @@ export class AutoDetail {
 
   @Input() auto: Auto;
   @Output() autoDeleted: EventEmitter<any> = new EventEmitter();
+  seatsNumber: number;
 
   constructor(public autoService: AutoService) {}
 
@@ -21,8 +22,10 @@ export class AutoDetail {
     }
     const profile = JSON.parse(localStorage.getItem('profile'));
     const user = { 'name': profile.nickname, 'userId': profile.user_id };
-    this.auto.clients.push(user);
-    this.auto.constraints.seats--;
+    for (let i = 0; i < this.seatsNumber; i++) {
+      this.auto.clients.push(user);
+      this.auto.constraints.seats--;
+    }
     this.autoService.updateAuto(this.auto).subscribe(() => {});
   }
 
@@ -37,6 +40,7 @@ export class AutoDetail {
     for (let i = 0; i < this.auto.clients.length; i++) {
       if (this.auto.clients[i].userId === profile.user_id) {
         this.auto.clients.splice(i, 1);
+        this.auto.constraints.seats++;
       }
     }
     this.autoService.updateAuto(this.auto).subscribe(() => {});

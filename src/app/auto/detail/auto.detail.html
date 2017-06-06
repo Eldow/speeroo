@@ -11,6 +11,9 @@
       <div *ngIf="auto.constraints.smoker">Smoking allowed</div>
       <div *ngIf="!auto.constraints.smoker">Smoking not allowed</div>
       <footer>Author : {{ auto.owner.name }}</footer>
+      Seats number :
+      <input  *ngIf="!isClient() && !isOwner()" id="seats" name="seats" class="form-control" type="number" required
+             min="1" max="{{auto.constraints.seats}}" [(ngModel)]="seatsNumber">
       <button *ngIf="!isClient() && !isOwner()" class="btn btn-primary" type="submit" (click)="joinAuto()"> Join </button>
       <button *ngIf="isOwner()" class="btn btn-primary" type="submit" (click)="deleteAuto()"> Delete </button>
       <button *ngIf="isClient() && !isOwner()" class="btn btn-primary" type="submit" (click)="cancelAuto()"> Cancel </button>
