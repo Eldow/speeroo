@@ -30,7 +30,7 @@ Start creating, and looking for carpooling offers.
 # Built with
 ## Client
 * [Angular 4](https://angular.io/) - The web framework used
-* [Bootstrap 4 Alpha](https://angular.io/) - Lux's bootswatch
+* [Bootstrap 4 Alpha](https://angular.io/) - Minty's bootswatch
 ## Server
 * [NodeJS](https://nodejs.org/) - Javascript runtime
 * [ExpressJS](https://expressjs.com/) - Helps to define the server's routes
