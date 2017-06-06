@@ -39,9 +39,9 @@ export class AutoPost {
     }
 
     public postAuto() {
-        const profile = JSON.parse(localStorage.getItem(('profile')));
-        this.auto.owner = { 'name': profile.nickname, 'userId': profile.user_id };
-        this.autoService.createAuto(this.auto).subscribe(data => {console.log(data); });
+      const profile = JSON.parse(localStorage.getItem(('profile')));
+      this.auto.owner = { 'name': profile.nickname, 'userId': profile.user_id };
+      this.autoService.createAuto(this.auto).subscribe(() => { });
     }
 
     public updateDestCities() {

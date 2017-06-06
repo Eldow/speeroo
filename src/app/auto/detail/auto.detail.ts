@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { User } from '../../user/user.class';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AutoService } from '../auto.service';
-import {Auto} from '../auto.class';
+import { Auto } from '../auto.class';
 
 @Component({
   selector: 'auto-detail',
@@ -11,15 +10,45 @@ import {Auto} from '../auto.class';
 
 export class AutoDetail {
 
-  @Input() auto: User;
+  @Input() auto: Auto;
+  @Output() autoDeleted: EventEmitter<any> = new EventEmitter();
 
   constructor(public autoService: AutoService) {}
 
-  public joinAuto(a: Auto){
+  public joinAuto() {
     const profile = JSON.parse(localStorage.getItem('profile'));
     const user = { 'name': profile.nickname, 'userId': profile.user_id };
-    a.clients.push(user);
-    this.autoService.updateAuto(a);
+    this.auto.clients.push(user);
+    this.autoService.updateAuto(this.auto).subscribe(() => {});
+  }
+
+  public deleteAuto() {
+    this.autoDeleted.emit();
+    this.autoService.deleteAuto(this.auto).subscribe(() => {});
+  }
+
+  public cancelAuto() {
+    this.autoDeleted.emit();
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    for (let i = 0; i < this.auto.clients.length; i++) {
+      if (this.auto.clients[i].userId === profile.user_id) {
+        this.auto.clients.splice(i, 1);
+      }
+    }
+    this.autoService.updateAuto(this.auto).subscribe(() => {});
+  }
+
+  public isClient() {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const index = this.auto.clients.findIndex(c =>
+      c.userId === profile.user_id
+    );
+    return index !== -1;
+  }
+
+  public isOwner() {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    return profile.user_id === this.auto.owner.userId;
   }
 
 }

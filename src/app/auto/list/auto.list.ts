@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AutoService } from '../auto.service';
+import {Auto} from '../auto.class';
 
 @Component({
   selector: 'auto-list',
@@ -10,5 +11,10 @@ import { AutoService } from '../auto.service';
 export class AutoList {
   @Input() autos;
   constructor(public autoService: AutoService) {
+  }
+
+  public onAutoDeleted(auto: Auto) {
+    const index = this.autos.indexOf(auto);
+    this.autos.splice(index, 1);
   }
 }

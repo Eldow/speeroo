@@ -1,3 +1,20 @@
-{{ auto }}
-
-<button type="submit" (click)="joinAuto()"> Join </button>
+<div class="card card-outline-primary text-xs-center">
+  <div class="card-block">
+    <blockquote class="card-blockquote">
+      <p>{{ auto.description }}</p>
+      <div *ngFor="let d of auto.destinations">
+        {{ d.name }}
+        {{ d.date }}
+      </div>
+      <div>{{ auto.constraints.seats }} seats left.</div>
+      <div *ngIf="auto.constraints.pets">Pets allowed</div>
+      <div *ngIf="!auto.constraints.pets">Pets not allowed</div>
+      <div *ngIf="auto.constraints.smoker">Smoking allowed</div>
+      <div *ngIf="!auto.constraints.smoker">Smoking not allowed</div>
+      <footer>Author : {{ auto.owner.name }}</footer>
+      <button *ngIf="!isClient() && !isOwner()" class="btn btn-primary" type="submit" (click)="joinAuto()"> Join </button>
+      <button *ngIf="isOwner()" class="btn btn-primary" type="submit" (click)="deleteAuto()"> Delete </button>
+      <button *ngIf="isClient() && !isOwner()" class="btn btn-primary" type="submit" (click)="cancelAuto()"> Cancel </button>
+    </blockquote>
+  </div>
+</div>

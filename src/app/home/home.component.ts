@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import {AutoService} from '../auto/auto.service';
 
 
 @Component({
@@ -9,7 +10,15 @@ import { AuthService } from '../auth/auth.service';
 })
 
 export class HomeComponent {
-  constructor (public auth: AuthService) {
-
+  ownedTrips = [];
+  clientTrips = [];
+  constructor (public auth: AuthService, public auto: AutoService) {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    auto.retrieveAutosByClientship(profile.user_id).subscribe(clientAutos => {
+      this.clientTrips = clientAutos;
+    });
+    auto.retrieveAutosByOwnership(profile.user_id).subscribe(ownedAutos => {
+      this.ownedTrips = ownedAutos;
+    });
   }
 }

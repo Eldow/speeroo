@@ -23,21 +23,15 @@ export class AutoService {
     return response;
   }
 
-  public retrieveAutosByOwnership(ownerId: string): Observable<any> {
+  public retrieveAutosByOwnership(ownerId: string): Observable<Auto[]> {
     const response = this.http.get(baseUrl + '/owner/' + encodeURI(ownerId),
-      {headers: contentHeaders});
-    if (response) {
-      response.map(this.mapAutos.bind(this));
-    }
+      {headers: contentHeaders}).map(this.mapAutos.bind(this));
     return response;
   }
 
-  public retrieveAutoByClientship(clientId: string): Observable<any> {
+  public retrieveAutosByClientship(clientId: string): Observable<Auto[]> {
     const response = this.http.get(baseUrl + '/client/' + encodeURI(clientId),
-      {headers: contentHeaders});
-    if (response) {
-      response.map(this.mapAutos.bind(this));
-    }
+      {headers: contentHeaders}).map(this.mapAutos.bind(this));
     return response;
   }
 
