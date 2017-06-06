@@ -13,6 +13,7 @@ export class AutoDetail {
   @Input() auto: Auto;
   @Output() autoDeleted: EventEmitter<any> = new EventEmitter();
   seatsNumber: number;
+  hasJoined = false;
 
   constructor(public autoService: AutoService) {}
 
@@ -26,7 +27,7 @@ export class AutoDetail {
       this.auto.clients.push(user);
       this.auto.constraints.seats--;
     }
-    this.autoService.updateAuto(this.auto).subscribe(() => {});
+    this.autoService.updateAuto(this.auto).subscribe(() => { this.hasJoined = true; });
   }
 
   public deleteAuto() {
