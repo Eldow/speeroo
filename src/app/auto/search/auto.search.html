@@ -2,6 +2,46 @@
   <div class="container-full">
     <auto-list #autolist></auto-list>
   </div>
+  <form name="searchForm" (ngSubmit)="searchFriend()" class="row">
+      <fieldset>
+
+              <div class="title-green-background">
+                  <h4>Search for a carpooling</h4>
+              </div>
+              <div id="inputSearch" >
+                  <label class="col-form-label col-form-label-sm" for="inputDep">
+                      Departure
+                  </label>
+                  <div class="form-group has-danger" [ngClass]="{'has-danger': !isDepValid() && searchDep}">
+                      <div class="dropdown">
+                          <input class="form-control dropdown-toggle" autocomplete="off" required
+                                 [ngClass]="{'form-control-danger': !isDepValid()}" type="text" [(ngModel)]="searchDep"
+                                 name="searchInputDep" id="inputDep" data-toggle="dropdown" (ngModelChange)="updateDepCities()"/>
+                          <ul class="dropdown-menu form-control" *ngIf="searchDepResults.length > 0">
+                              <li *ngFor="let dep of searchDepResults" (click)="setSearchDep(dep.matching_full_name)">{{dep.matching_full_name}}</li>
+                          </ul>
+                      </div>
+                  </div>
+                  <label class="col-form-label col-form-label-sm" for="inputDest">
+                      Arrival
+                  </label>
+                  <div class="form-group has-danger" [ngClass]="{'has-danger': !isDestValid() && searchDest}">
+                      <div class="dropdown">
+                          <input class="form-control dropdown-toggle" autocomplete="off" required
+                                 [ngClass]="{'form-control-danger': !isDestValid()}" type="text" [(ngModel)]="searchDest"
+                                 name="searchInputDest" id="inputDest" data-toggle="dropdown" (ngModelChange)="updateDestCities()"/>
+                          <ul class="dropdown-menu form-control" *ngIf="searchDestResults.length > 0">
+                              <li *ngFor="let dest of searchDestResults" (click)="setSearchDest(dest.matching_full_name)">{{dest.matching_full_name}}</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <button class="btn btn-info col-xs-4" [class.disabled]="!isSearchFormValid()" type="submit">
+                  <i class="fa fa-lg fa-search"></i>
+              </button>
+
+      </fieldset>
+  </form>
   <!--
   <form name="searchForm" (ngSubmit)="searchFriend()" class="row">
     <fieldset>

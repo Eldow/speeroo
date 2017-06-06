@@ -4,18 +4,18 @@ import 'rxjs/add/operator/map';
 import { contentHeaders } from '../auth/auth.headers';
 import { Observable } from 'rxjs/Rx';
 
-const baseUrl = 'https://api.teleport.org/api/cities';
+const baseUrl = 'https://api.teleport.org/api/cities/?limit=5';
 
 @Injectable()
-export class UserService {
+export class LocationService {
   constructor(public http: Http) {}
 
-  private logResponse(response: Response):any{
+  private logResponse(response: Response): any {
     return response.json();
   }
 
   public getLocationByName(name: string): Observable<any> {
-    const location = this.http.get(baseUrl + '/?search=' + encodeURI(name),
+    const location = this.http.get(baseUrl + '&search=' + encodeURI(name),
      {headers: contentHeaders}).map(this.logResponse.bind(this));
     return location;
   }
