@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AutoService } from '../auto.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AutoService } from '../auto.service';
 })
 
 export class AutoList {
-
+  @Input() autos;
   constructor(public autoService: AutoService) {
   }
 }
