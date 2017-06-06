@@ -32,6 +32,15 @@ export class AutoService {
     return response;
   }
 
+  public retrieveAutoByClientship(clientId: string): Observable<any> {
+    const response = this.http.get(baseUrl + '/client/' + encodeURI(clientId),
+      {headers: contentHeaders});
+    if (response) {
+      response.map(this.mapAuto.bind(this));
+    }
+    return response;
+  }
+
   public retrieveAutosByDestinations(from: string, to: string): Observable<Auto[]>{
     const response = this.http.post(baseUrl + '/search/', { 'dep': from, 'dest': to },
       {headers: contentHeaders}).map(this.mapAuto.bind(this));
@@ -58,7 +67,8 @@ export class AutoService {
       owner: r.owner,
       clients: r.clients,
       description: r.description,
-      destinations: r.destination
+      destinations: r.destination,
+      constraints: r.constraints
     })
     return auto;
   }

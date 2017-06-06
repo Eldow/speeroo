@@ -8,7 +8,8 @@ var AutoSchema = new Schema({
   owner: { name: { type: String }, userId: { type: String } },
   description: String,
   clients: [{ name: { type: String }, userId: { type: String } }],
-  destinations: [{"name": String, "date": Date}]
+  destinations: [{"name": String, "date": Date}],
+  constraints: {}
 });
 
 module.exports = mongoose.model('Auto', AutoSchema );

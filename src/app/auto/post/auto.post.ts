@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { AutoService } from '../auto.service';
 import { Auto } from '../auto.class';
 
@@ -10,9 +10,20 @@ import { Auto } from '../auto.class';
 
 export class AutoPost {
 
-  @Input() auto: Auto;
-  @Input() destinationName: string;
-  @Input() destinationDate: Date;
+  auto: Auto = {
+    owner: {},
+    description: '',
+    destinations: [],
+    constraints: {
+      seats: 1,
+      pets: false,
+      smoker: false,
+      music: false
+    }
+  } as Auto;
+  destinationName: string;
+  destinationDate = Date.now();
+  minDate = Date.now();
 
   constructor(public autoService: AutoService) {
   }
@@ -29,6 +40,8 @@ export class AutoPost {
   public postAuto() {
     const profile = JSON.parse(localStorage.getItem(('profile')));
     this.auto.owner = { 'name': profile.nickname, 'userId': profile.user_id };
-    this.autoService.createAuto(this.auto);
+    console.log(this.auto);
+    console.log('post');
+    //this.autoService.createAuto(this.auto);
   }
 }
