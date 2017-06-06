@@ -14,8 +14,9 @@ export class AutoSearch {
   searchDepResults = [];
   searchDest: string;
   searchDestResults = [];
+  nowDate: Date;
   constructor(public locationService: LocationService) {
-
+      this.nowDate = new Date();
   }
 
   public updateDepCities() {
