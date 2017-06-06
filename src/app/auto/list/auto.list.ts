@@ -29,7 +29,7 @@ export class AutoList {
     if (this.constraints === undefined) {
       return true;
     }
-
+    /*
     if (auto.constraints.showPets !== this.constraints.pets) {
       return false;
     }
@@ -39,7 +39,7 @@ export class AutoList {
     if (auto.constraints.showSmoker !== this.constraints.smoker) {
       return false;
     }
-
+    */
     if (auto.constraints.seats === 0) {
       return false;
     }
