@@ -25,7 +25,7 @@ export class AutoDetail {
     const user = { 'name': profile.nickname, 'userId': profile.user_id };
     for (let i = 0; i < this.seatsNumber; i++) {
       this.auto.clients.push(user);
-      this.auto.constraints.seats--;
+      this.auto.constraints.seats = this.auto.constraints.seats - 1;
     }
     this.autoService.updateAuto(this.auto).subscribe(() => { this.hasJoined = true; });
   }
@@ -41,7 +41,7 @@ export class AutoDetail {
     for (let i = 0; i < this.auto.clients.length; i++) {
       if (this.auto.clients[i].userId === profile.user_id) {
         this.auto.clients.splice(i, 1);
-        this.auto.constraints.seats++;
+        this.auto.constraints.seats = this.auto.constraints.seats + 1;
       }
     }
     this.autoService.updateAuto(this.auto).subscribe(() => {});
