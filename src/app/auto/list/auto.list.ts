@@ -29,17 +29,17 @@ export class AutoList {
     if (this.constraints === undefined) {
       return true;
     }
-    /*
-    if (auto.constraints.showPets !== this.constraints.pets) {
+
+    if (auto.constraints.pets !== this.constraints.pets) {
       return false;
     }
-    if (auto.constraints.showMusic !== this.constraints.music) {
+    if (auto.constraints.music !== this.constraints.music) {
       return false;
     }
-    if (auto.constraints.showSmoker !== this.constraints.smoker) {
+    if (auto.constraints.smoker !== this.constraints.smoker) {
       return false;
     }
-    */
+
     if (auto.constraints.seats === 0) {
       return false;
     }
