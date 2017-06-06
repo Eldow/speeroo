@@ -50,7 +50,7 @@ router.route('/:id')
     Auto.findById(req.params.id, function(err, auto) {
       if (err)
         res.send(err);
-      auto.owner= req.body.owner;
+      auto.owner = req.body.owner;
       auto.description = req.body.description;
       auto.clients = req.body.clients;
       auto.save(function(err) {

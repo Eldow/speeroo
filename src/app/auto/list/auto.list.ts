@@ -26,10 +26,7 @@ export class AutoList {
     let dateDep = false;
     let dateDest = false;
 
-    console.log(auto.constraints);
-    console.log(this.constraints);
-
-    if (this.constraints == undefined) {
+    if (this.constraints === undefined) {
       return true;
     }
 
@@ -47,7 +44,7 @@ export class AutoList {
       return false;
     }
 
-    if (auto.constraints.seats - this.constraints.seatsNumber < 0) {
+    if (auto.constraints.seats - this.constraints.seats < 0) {
       return false;
     }
     indexDep = auto.destinations.findIndex(d => d.name === this.constraints.dep);

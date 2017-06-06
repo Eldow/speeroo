@@ -16,12 +16,11 @@ export class AutoSearch {
   searchDestResults = [];
   nowDate: Date;
   seatsNumber: number;
-  showPets: boolean;
-  showSmoker: boolean;
-  showMusic: boolean;
+  showPets = false;
+  showSmoker = false;
+  showMusic = false;
   searchResult: any;
   constraints: any;
-  isSearch= true;
 
   constructor(public autoService: AutoService, public locationService: LocationService) {
   }
