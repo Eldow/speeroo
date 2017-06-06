@@ -5,10 +5,10 @@ const Auto = require('./auto');
 router.route('/')
   .post(function(req, res) {
     var auto = new Auto(req.body);
-    auto.save(function(err, createdAuto) {
+    auto.save(function(err) {
       if (err)
         res.send(err);
-      res.json({ message: 'Auto created!', auto: createdAuto });
+      res.json({ message: 'Auto created!' });
     });
   })
 
@@ -16,7 +16,6 @@ router.route('/search/')
   //Get an auto by destination
   .post(function (req, res){
     Auto.find({'destinations.name':{$all:[req.body.dep, req.body.dest]}}, function(err, autos){
-        console.log(req.body);
       if (err){
         res.send(err);
       } else {

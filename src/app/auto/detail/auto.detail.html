@@ -1,12 +1,11 @@
-<div class="card card-outline-primary text-xs-center">
+<div class="card card-outline-primary text-xs-center col-md-3">
   <div class="card-block">
     <blockquote class="card-blockquote">
-      <p>{{ auto.description }}</p>
+      <h4>{{ auto.description }}</h4>
       <div *ngFor="let d of auto.destinations">
-        {{ d.name }}
-        {{ d.date }}
+        - {{ d.name }} on {{ d.date | date:'short' }}
       </div>
-      <div>{{ auto.constraints.seats }} seats left.</div>
+      <div>{{ auto.constraints.seats }} seats left</div>
       <div *ngIf="auto.constraints.pets">Pets allowed</div>
       <div *ngIf="!auto.constraints.pets">Pets not allowed</div>
       <div *ngIf="auto.constraints.smoker">Smoking allowed</div>

@@ -16,9 +16,13 @@ export class AutoDetail {
   constructor(public autoService: AutoService) {}
 
   public joinAuto() {
+    if (this.auto.constraints.seats <= 0) {
+      return;
+    }
     const profile = JSON.parse(localStorage.getItem('profile'));
     const user = { 'name': profile.nickname, 'userId': profile.user_id };
     this.auto.clients.push(user);
+    this.auto.constraints.seats--;
     this.autoService.updateAuto(this.auto).subscribe(() => {});
   }
 

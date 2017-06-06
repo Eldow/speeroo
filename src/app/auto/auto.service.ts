@@ -11,9 +11,9 @@ const baseUrl = 'http://localhost:5200/api/autos';
 export class AutoService {
   constructor(public http: Http) {}
 
-  public createAuto(auto: any): Observable<Auto> {
+  public createAuto(auto: any): Observable<any> {
     const response = this.http.post(baseUrl, auto,
-     {headers: contentHeaders}).map(this.mapAuto.bind(this));
+     {headers: contentHeaders}).map(this.logResponse.bind(this));
     return response;
   }
 
@@ -51,10 +51,6 @@ export class AutoService {
     return response.json();
   }
 
-  private mapAuto(response: Response): Auto {
-    return this.toAuto(response.json());
-  }
-
   private mapAutos(response: Response): Auto[] {
     return response.json().map(this.toAuto.bind(this));
   }
@@ -65,7 +61,7 @@ export class AutoService {
       owner: r.owner,
       clients: r.clients,
       description: r.description,
-      destinations: r.destination,
+      destinations: r.destinations,
       constraints: r.constraints
     })
     return auto;
