@@ -29,7 +29,8 @@ export class AutoList {
     if (this.constraints === undefined) {
       return true;
     }
-
+    console.log(auto.constraints);
+    console.log(this.constraints);
     if (auto.constraints.pets !== this.constraints.pets) {
       return false;
     }
