@@ -12,6 +12,10 @@
   display: table-cell;
 }
 
+.title-green-background h4{
+  color: white;
+}
+
 .table-cell-custom{
   padding: 0.5em;
 }
@@ -22,6 +26,10 @@
 
 .btn:hover{
   cursor:pointer;
+}
+
+.btn.disabled:hover{
+  cursor:not-allowed;
 }
 
 .parent-flex{

@@ -16,6 +16,7 @@ import { AutoList } from './auto/list/auto.list';
 import { AutoSearch } from './auto/search/auto.search';
 import { AutoService } from './auto/auto.service';
 import { LoginComponent } from './login/login.component';
+import { LocationService } from './location/location.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
@@ -32,7 +33,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DndModule.forRoot()
   ],
   providers: [
-    AuthGuard, AuthService, UserService, AutoService, {
+    AuthGuard, AuthService, UserService, AutoService, LocationService, {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [ Http, RequestOptions ]
