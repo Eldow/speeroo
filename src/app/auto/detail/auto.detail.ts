@@ -18,7 +18,7 @@ export class AutoDetail {
   constructor(public autoService: AutoService) {}
 
   public joinAuto() {
-    if (this.auto.constraints.seats - this.seatsNumber <= 0) {
+    if (this.auto.constraints.seats - this.seatsNumber < 0) {
       return;
     }
     const profile = JSON.parse(localStorage.getItem('profile'));
