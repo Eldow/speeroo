@@ -23,7 +23,7 @@ export class AutoService {
     return response;
   }
 
-  public retrieveAuto(ownerId: string): Observable<any> {
+  public retrieveAutosByOwnership(ownerId: string): Observable<any> {
     const response = this.http.get(baseUrl + '/owner/' + encodeURI(ownerId),
       {headers: contentHeaders});
     if (response) {
@@ -32,7 +32,13 @@ export class AutoService {
     return response;
   }
 
-  public deleteFriendlist (auto: Auto): Observable<any> {
+  public retrieveAutosByDestinations(from: string, to: string): Observable<Auto[]>{
+    const response = this.http.post(baseUrl + '/search/', { 'dep': from, 'dest': to },
+      {headers: contentHeaders}).map(this.mapAuto.bind(this));
+    return response;
+  }
+
+  public deleteAuto (auto: Auto): Observable<any> {
     const response = this.http.delete(baseUrl + '/' + encodeURI(auto._id),
       {headers: contentHeaders}).map(this.logResponse.bind(this));
     return response;
